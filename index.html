@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NexShopy — যেখানে বারো মাস চৈত্র মাস</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #fefaf6;
+      color: #333;
+    }
+
+    .header {
+      text-align: center;
+      padding: 30px 20px 10px;
+      background-color: #fff0e6;
+    }
+
+    .big-logo {
+      width: 100%;
+      max-width: 720px;
+      height: auto;
+      display: block;
+      margin: 0 auto 10px;
+    }
+
+    .gradient-tagline {
+      font-size: 36px;
+      font-weight: 700;
+      background: linear-gradient(90deg, #ff6600, #25D366);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: auto;
+      cursor: pointer;
+    }
+
+    .product-name {
+      font-weight: 600;
+      margin: 12px 0 6px;
+      color: #333;
+    }
+
+    .order-button {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 10px 20px;
+      background-color: #25D366;
+      color: white;
+      font-size: 15px;
+      border: none;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .order-button:hover {
+      background-color: #1ebe5b;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #888;
+      background-color: #fff0e6;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 480px) {
+      .gradient-tagline {
+        font-size: 24px;
+      }
+
+      .big-logo {
+        max-width: 100%;
+      }
+	  .footer {
+  text-align: center;
+  padding: 40px 30px;
+  font-size: 25px; /* Increased font size */
+  color: #444;
+  background-color: #fff0e6;
+  margin-top: 40px;
+  line-height: 2; /* more vertical spacing */
+}
+
+.footer strong {
+  color: #111;
+  font-weight: 600;
+}
+
+.footer a {
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.social-icon {
+  width: 28px;
+  height: 28px;
+  vertical-align: middle;
+  margin: 0 8px;
+  transition: transform 0.2s ease;
+}
+
+.social-icon:hover {
+  transform: scale(1.2);
+}
+
+.footer .copyright {
+  margin-top: 15px;
+  font-size: 15px;
+  color: #777;
+}
+}
+ </style>
+</head>
+<body>
+
+  <!-- Logo + Tagline -->
+  <div class="header">
+    <img src="images/logo.png" alt="NexShopy Logo" class="big-logo">
+    <p class="gradient-tagline">যেখানে বারো মাস চৈত্র মাস</p>
+  </div>
+
+  <!-- Product Gallery -->
+  <div class="gallery">
+
+    <!-- Product 1 -->
+    <div class="product-card">
+      <a href="https://www.youtube.com/watch?v=VIDEO_ID_1" target="_blank">
+        <img src="images/product1.jpg" alt="Product 1">
+      </a>
+      <div class="product-name">T-Shirt</div>
+	  <p><b>Price:50 per pcs. only</b></p>
+      <a href="https://wa.me/917003263726?text=Hi%2C%20I%20want%20to%20order%20Product%201" target="_blank" class="order-button">🛒 Order Now</a>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="product-card">
+      <a href="https://www.youtube.com/watch?v=VIDEO_ID_2" target="_blank">
+        <img src="images/product2.jpg" alt="Product 2">
+      </a>
+      <div class="product-name">Fashion Jewellery</div>
+	  <p><b>Price:150 only</b></p>
+      <a href="https://wa.me/917003263726?text=Hi%2C%20I%20want%20to%20order%20Product%202" target="_blank" class="order-button">🛒 Order Now</a>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="product-card">
+      <a href="https://www.youtube.com/watch?v=VIDEO_ID_3" target="_blank">
+        <img src="images/product3.jpg" alt="Product 3">
+      </a>
+      <div class="product-name">Makeup Kit</div>
+	  <p><b>Price:250 only</b></p>
+      <a href="https://wa.me/917003263726?text=Hi%2C%20I%20want%20to%20order%20Product%203" target="_blank" class="order-button">🛒 Order Now</a>
+    </div>
+       <!-- Product 4 -->
+    <div class="product-card">
+      <a href="https://www.youtube.com/watch?v=VIDEO_ID_3" target="_blank">
+        <img src="images/product4.jpg" alt="Product 4">
+      </a>
+      <div class="product-name">Glass hair ring</div>
+	  <p><b>Price:130 only</b></p>
+      <a href="https://wa.me/917003263726?text=Hi%2C%20I%20want%20to%20order%20Product%203" target="_blank" class="order-button">🛒 Order Now</a>
+    </div>
+     <!-- Product 5 -->
+    <div class="product-card">
+      <a href="https://www.youtube.com/watch?v=VIDEO_ID_3" target="_blank">
+        <img src="images/product5.jpg" alt="Product 5">
+      </a>
+      <div class="product-name">Joging Shooe</div>
+	  <p><b>Price:350 only</b></p>
+      <a href="https://wa.me/917003263726?text=Hi%2C%20I%20want%20to%20order%20Product%203" target="_blank" class="order-button">🛒 Order Now</a>
+    </div>
+	 <!-- Product 6 -->
+    <div class="product-card">
+      <a href="https://www.youtube.com/watch?v=VIDEO_ID_3" target="_blank">
+        <img src="images/product6.jpg" alt="Product 6">
+      </a>
+      <div class="product-name">Lipistick</div>
+	  <p><b>Price:150 only(10 pcs)</b></p>
+      <a href="https://wa.me/917003263726?text=Hi%2C%20I%20want%20to%20order%20Product%203" target="_blank" class="order-button">🛒 Order Now</a>
+    </div>
+    </div>
+     <!-- Footer -->
+<div class="footer">
+  <p><strong>📍 Address:</strong> Vill & PO.:Rajhat, Dist.:Hooghly, PIN.:712123</p>
+  <p><strong>📞 Contact:</strong> +91 9831681165</p>
+  <p>
+    <strong>🔗 Follow us:</strong>
+    <a href="https://facebook.com/YourPageName" target="_blank">
+      <img src="images/facebook.png" alt="Facebook" class="social-icon">
+    </a>
+    <a href="https://instagram.com/YourHandle" target="_blank">
+      <img src="images/instagram.png" alt="Instagram" class="social-icon">
+    </a>
+  </p>
+  <p class="copyright">© 2025 NexShopy. All rights reserved.</p>
+</div>
+</div>
+
+</body>
+</html>
