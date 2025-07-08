@@ -254,11 +254,333 @@
       }
     }
   </style>
+  <style>
+/* Modal Styles */
+.checkout-modal {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 2% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 450px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.modal-body {
+  overflow-y: auto;
+  padding-right: 10px;
+  flex: 1;
+}
+
+/* Scrollbar styling */
+.modal-body::-webkit-scrollbar {
+  width: 6px;
+}
+.modal-body::-webkit-scrollbar-thumb {
+  background: #25D366;
+  border-radius: 3px;
+}
+
+.close-modal {
+  color: #aaa;
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+  margin-top: -10px;
+}
+
+/* Form Styles */
+.form-section {
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.form-section:last-child {
+  border-bottom: none;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.price-note {
+  font-size: 12px;
+  color: #666;
+  margin-top: 3px;
+}
+
+/* Quantity Selector - Fixed Alignment */
+.qty-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.qty-btn {
+  width: 30px;
+  height: 30px;
+  background: #25D366;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  padding: 0;
+}
+
+#productQty {
+  width: 50px;
+  text-align: center;
+  margin: 0;
+  padding: 5px;
+}
+
+/* Payment Options - Fixed Alignment */
+.payment-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.payment-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.payment-option input[type="radio"] {
+  margin: 0;
+  width: auto;
+}
+
+/* Submit Button */
+.modal-footer {
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.submit-order-btn {
+  background-color: #25D366;
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-order-btn:hover {
+  background-color: #128C7E;
+}
+
+@media (max-height: 700px) {
+  .modal-content {
+    max-height: 85vh;
+    margin: 1% auto;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const modal = document.getElementById('checkoutModal');
+  const orderForm = document.getElementById('orderForm');
+  
+  // Order button click handler
+  document.querySelectorAll('.order-button').forEach(button => {
+    button.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      const productCard = this.closest('.product-card');
+      const productName = productCard.querySelector('.product-name').textContent;
+      const productPrice = productCard.querySelector('.product-price').textContent;
+      
+      document.getElementById('modalProductName').value = productName;
+      document.getElementById('modalProductPrice').value = productPrice;
+      
+      modal.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  
+  // Quantity controls
+  document.querySelector('.qty-btn.minus').addEventListener('click', function() {
+    const qtyInput = document.getElementById('productQty');
+    if (qtyInput.value > 1) qtyInput.value--;
+  });
+  
+  document.querySelector('.qty-btn.plus').addEventListener('click', function() {
+    const qtyInput = document.getElementById('productQty');
+    if (qtyInput.value < 10) qtyInput.value++;
+  });
+  
+  // Close modal
+  document.querySelector('.close-modal').addEventListener('click', closeModal);
+  window.addEventListener('click', function(e) {
+    if (e.target === modal) closeModal();
+  });
+  
+  // Form submission
+  orderForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const productName = document.getElementById('modalProductName').value;
+    const productCode = document.getElementById('productCode').value || "N/A";
+    const productPrice = document.getElementById('modalProductPrice').value;
+    const quantity = document.getElementById('productQty').value;
+    const customerName = document.getElementById('customerName').value;
+    const customerPhone = document.getElementById('customerPhone').value;
+    const customerAddress = document.getElementById('customerAddress').value;
+    const distributorCode = document.getElementById('distributorCode').value || "N/A";
+    const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+    
+    const priceValue = parseFloat(productPrice.replace(/[^\d.]/g, ''));
+    const total = (priceValue * quantity).toFixed(2);
+    
+    const message = `*NEW ORDER*%0A%0A` +
+                   `*Product:* ${productName}%0A` +
+                   `*Code:* ${productCode}%0A` +
+                   `*Price:* ${productPrice}%0A` +
+                   `*Qty:* ${quantity}%0A` +
+                   `*Total:* ₹${total}%0A%0A` +
+                   `*Customer:* ${customerName}%0A` +
+                   `*Phone:* ${customerPhone}%0A` +
+                   `*Address:* ${customerAddress}%0A%0A` +
+                   `*Distributor Code:* ${distributorCode}%0A` +
+                   `*Payment:* ${paymentMethod}%0A%0A` +
+                   `**Price excludes packaging & delivery`;
+    
+    window.open(`https://wa.me/917003263726?text=${message}`, '_blank');
+    closeModal();
+    orderForm.reset();
+  });
+  
+  function closeModal() {
+    document.getElementById('checkoutModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+});
+</script>
 </head>
+<div id="checkoutModal" class="checkout-modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h3>Complete Your Order</h3>
+    
+    <div class="modal-body">
+      <form id="orderForm">
+        <!-- Product Info -->
+        <div class="form-section">
+          <div class="form-group">
+            <label>Product Name</label>
+            <input type="text" id="modalProductName" readonly>
+          </div>
+          <div class="form-group">
+            <label>Product Code (Optional)</label>
+            <input type="text" id="productCode" placeholder="Enter product code if available">
+          </div>
+          <div class="form-group">
+            <label>Price</label>
+            <input type="text" id="modalProductPrice" readonly>
+            <p class="price-note">** Price excludes packaging & delivery</p>
+          </div>
+          <div class="form-group">
+            <label>Quantity</label>
+            <div class="qty-controls">
+              <button type="button" class="qty-btn minus">-</button>
+              <input type="number" id="productQty" value="1" min="1" max="10">
+              <button type="button" class="qty-btn plus">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Customer Info -->
+        <div class="form-section">
+          <h4>Your Details</h4>
+          <div class="form-group">
+            <input type="text" id="customerName" placeholder="Full Name*" required>
+          </div>
+          <div class="form-group">
+            <input type="tel" id="customerPhone" placeholder="Phone Number*" required>
+          </div>
+          <div class="form-group">
+            <textarea id="customerAddress" placeholder="Address*" rows="2" required></textarea>
+          </div>
+        </div>
+
+        <!-- Optional Fields -->
+        <div class="form-section">
+          <h4>Additional Information</h4>
+          <div class="form-group">
+            <input type="text" id="distributorCode" placeholder="Distributor/Referral Code (Optional)">
+          </div>
+        </div>
+
+        <!-- Payment -->
+        <div class="form-section">
+          <h4>Payment Method</h4>
+          <div class="payment-options">
+            <label class="payment-option">
+              <input type="radio" name="payment" value="Cash on Delivery" checked>
+              <span>Cash on Delivery</span>
+            </label>
+            <label class="payment-option">
+              <input type="radio" name="payment" value="UPI Payment">
+              <span>UPI Payment</span>
+            </label>
+          </div>
+        </div>
+      </form>
+    </div>
+    
+    <div class="modal-footer">
+      <button type="submit" form="orderForm" class="submit-order-btn">
+        Complete Order
+      </button>
+    </div>
+  </div>
+</div>
 <body>
   <!-- Social Icons -->
   <div class="social-icons-top">
-    <a href="https://www.facebook.com/share/v/1AWyxt1wUR/" target="_blank" aria-label="Facebook">
+    <a href="https://facebook.com/profile.php?id=61578152637279" target="_blank" aria-label="Facebook">
       <img src="images/facebook.png" alt="Facebook" class="social-icon" loading="lazy">
     </a>
     <a href="https://www.instagram.com/reel/DL1RVzcIzfn/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==" target="_blank" aria-label="Instagram">
@@ -268,13 +590,11 @@
       <img src="images/youtube.png" alt="YouTube" class="social-icon" loading="lazy">
     </a>
   </div>
-
   <!-- Header Section -->
   <header class="header">
     <img src="images/logo.png" alt="NexShopy Logo" class="big-logo" loading="lazy">
     <h1 class="gradient-tagline">যেখানে বারো মাস চৈত্র মাস</h1>
   </header>
-
   <!-- Product Gallery -->
   <main class="gallery">
     <!-- Product 1 -->
@@ -292,7 +612,6 @@
            class="order-button">🛒 Order Now</a>
       </div>
     </article>
-
     <!-- Product 2 -->
     <article class="product-card">
       <div class="product-image-container">
@@ -308,7 +627,6 @@
            class="order-button">🛒 Order Now</a>
       </div>
     </article>
-
     <!-- Product 3 -->
     <article class="product-card">
       <div class="product-image-container">
@@ -387,8 +705,6 @@
            class="order-button">🛒 Order Now</a>
       </div>
   </main>
-
-
   <!-- Footer -->
   <footer class="footer">
     <div class="footer-content">
@@ -396,7 +712,7 @@
       <p><strong>📞 Contact:</strong> +91 9831681000</p>
       <div class="footer-links">
         <strong>🔗 Follow us:</strong>
-        <a href="https://www.facebook.com/share/v/1AWyxt1wUR/" target="_blank" aria-label="Facebook">
+        <a href="https://www.facebook.com/profile.php?id=61578152637279" target="_blank" aria-label="Facebook">
           <img src="images/facebook.png" alt="Facebook" class="social-icon" loading="lazy">
         </a>
         <a href="https://www.instagram.com/reel/DL1RVzcIzfn/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==" target="_blank" aria-label="Instagram">
