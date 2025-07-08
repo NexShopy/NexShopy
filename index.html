@@ -2,233 +2,412 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NexShopy — যেখানে বারো মাস চৈত্র মাস</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background-color: #fefaf6;
-      color: #333;
+    :root {
+      --primary-color: #25D366;
+      --secondary-color: #ff6600;
+      --bg-color: #fefaf6;
+      --header-bg: #fff0e6;
+      --text-dark: #333;
+      --text-medium: #555;
+      --text-light: #777;
     }
-
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-dark);
+      line-height: 1.6;
+      position: relative;
+    }
+    
+    /* Header Styles */
     .header {
       text-align: center;
-      padding: 30px 20px 10px;
-      background-color: #fff0e6;
+      padding: 70px 20px 30px;
+      background-color: var(--header-bg);
+      position: relative;
+      margin-bottom: 20px;
     }
-
+    
     .big-logo {
       width: 100%;
-      max-width: 720px;
+      max-width: 650px;
       height: auto;
       display: block;
-      margin: 0 auto 10px;
+      margin: 0 auto 15px;
+      border-radius: 8px;
     }
-
+    
     .gradient-tagline {
-      font-size: 36px;
+      font-size: 2.2rem;
       font-weight: 700;
-      background: linear-gradient(90deg, #ff6600, #25D366);
+      background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       text-align: center;
-      margin-top: 10px;
+      margin: 15px 0;
     }
-
+    
+    /* Social Icons */
+    .social-icons-top {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 20px;
+      z-index: 100;
+    }
+    
+    .social-icon {
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-radius: 50%;
+    }
+    
+    .social-icon:hover {
+      transform: scale(1.15) translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    /* Product Gallery */
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 30px;
-      padding: 40px 20px;
+      padding: 30px 20px;
       max-width: 1200px;
-      margin: auto;
+      margin: 0 auto;
     }
-
+    
     .product-card {
       background: white;
       border-radius: 12px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
       overflow: hidden;
       text-align: center;
-      transition: transform 0.3s ease;
+      transition: all 0.3s ease;
+      position: relative;
     }
-
+    
     .product-card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-8px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
     }
-
+    
+    .product-image-container {
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
+      position: relative;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
     .product-card img {
       width: 100%;
-      height: auto;
-      cursor: pointer;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
     }
-
+    
+    .product-card:hover img {
+      transform: scale(1.05);
+    }
+    
+    .product-info {
+      padding: 18px 15px;
+    }
+    
     .product-name {
-      font-weight: 300;
-      margin: 12px 0 6px;
-      color: #333;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-dark);
+      font-size: 1.1rem;
     }
-
+    
+    .product-price {
+      color: #e74c3c;
+      font-weight: 600;
+      margin-bottom: 15px;
+      font-size: 1rem;
+    }
+    
     .order-button {
       display: inline-block;
-      margin-bottom: 16px;
-      padding: 10px 20px;
-      background-color: #25D366;
+      padding: 10px 28px;
+      background-color: var(--primary-color);
       color: white;
-      font-size: 30px;
+      font-size: 0.95rem;
       border: none;
       border-radius: 30px;
       text-decoration: none;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(37, 211, 102, 0.2);
     }
-
+    
     .order-button:hover {
       background-color: #1ebe5b;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(37, 211, 102, 0.3);
     }
-
+    
+    /* Footer Styles */
     .footer {
       text-align: center;
-      padding: 20px;
-      font-size: 14px;
-      color: #888;
-      background-color: #fff0e6;
-      margin-top: 40px;
+      padding: 40px 30px;
+      background-color: var(--header-bg);
+      margin-top: 50px;
     }
-
-    @media (max-width: 480px) {
+    
+    .footer-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .footer p {
+      margin-bottom: 12px;
+      color: var(--text-medium);
+      font-size: 1rem;
+    }
+    
+    .footer strong {
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+    
+    .footer-links {
+      margin: 20px 0;
+    }
+    
+    .footer-links a {
+      display: inline-block;
+      margin: 0 12px;
+    }
+    
+    .copyright {
+      margin-top: 25px;
+      font-size: 0.85rem;
+      color: var(--text-light);
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
       .gradient-tagline {
-        font-size: 24px;
+        font-size: 1.8rem;
       }
-
-      .big-logo {
-        max-width: 100%;
+      
+      .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+        padding: 20px 15px;
       }
-	  .footer {
-  text-align: center;
-  padding: 40px 30px;
-  font-size: 25px; /* Increased font size */
-  color: #444;
-  background-color: #fff0e6;
-  margin-top: 40px;
-  line-height: 2; /* more vertical spacing */
-}
-
-.footer strong {
-  color: #111;
-  font-weight: 600;
-}
-
-.footer a {
-  text-decoration: none;
-  margin: 0 10px;
-}
-
-.social-icon {
-  width: 28px;
-  height: 28px;
-  vertical-align: middle;
-  margin: 0 8px;
-  transition: transform 0.2s ease;
-}
-
-.social-icon:hover {
-  transform: scale(1.2);
-}
-
-.footer .copyright {
-  margin-top: 15px;
-  font-size: 15px;
-  color: #777;
-}
-}
- </style>
+      
+      .product-image-container {
+        height: 200px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .header {
+        padding-top: 80px;
+        padding-bottom: 25px;
+      }
+      
+      .gradient-tagline {
+        font-size: 1.5rem;
+      }
+      
+      .social-icons-top {
+        gap: 15px;
+        top: 15px;
+      }
+      
+      .social-icon {
+        width: 26px;
+        height: 26px;
+      }
+      
+      .footer {
+        padding: 30px 20px;
+      }
+      
+      .footer p {
+        font-size: 0.9rem;
+      }
+      
+      .footer-links a {
+        margin: 0 8px;
+      }
+    }
+  </style>
 </head>
 <body>
-
-  <!-- Logo + Tagline -->
-  <div class="header">
-    <img src="images/logo.png" alt="NexShopy Logo" class="big-logo">
-    <p class="gradient-tagline">যেখানে বারো মাস চৈত্র মাস</p>
+  <!-- Social Icons -->
+  <div class="social-icons-top">
+    <a href="https://facebook.com/profile.php?id=61578152637279" target="_blank" aria-label="Facebook">
+      <img src="images/facebook.png" alt="Facebook" class="social-icon" loading="lazy">
+    </a>
+    <a href="https://www.instagram.com/reel/DL1RVzcIzfn/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==" target="_blank" aria-label="Instagram">
+      <img src="images/instagram.png" alt="Instagram" class="social-icon" loading="lazy">
+    </a>
+    <a href="https://youtube.com/shorts/oBMi1WCXNz0?feature=share" target="_blank" aria-label="YouTube">
+      <img src="images/youtube.png" alt="YouTube" class="social-icon" loading="lazy">
+    </a>
   </div>
 
-  <!-- Product Gallery -->
-  <div class="gallery">
+  <!-- Header Section -->
+  <header class="header">
+    <img src="images/logo.png" alt="NexShopy Logo" class="big-logo" loading="lazy">
+    <h1 class="gradient-tagline">যেখানে বারো মাস চৈত্র মাস</h1>
+  </header>
 
+  <!-- Product Gallery -->
+  <main class="gallery">
     <!-- Product 1 -->
-    <div class="product-card">
-       <a href="https://www.youtube.com/watch?v=SetyDmWuhro" target="_blank">
-        <img src="images/product1.jpg" alt="Product 1">
-      </a>
-      <div class="product-name">Hand Embroidered Floral Design Bedsheet Queen Size(108x90 inches)</div>
-	  <p>Price:999/- per pcs. only</p>
-      <a href="https://wa.me/917003263726?text=Hi%2C%20I%20want%20to%20order%20Product%201" target="_blank" class="order-button">🛒 Order Now</a>
-    </div>
+    <article class="product-card">
+      <div class="product-image-container">
+        <a href="https://youtu.be/SetyDmWuhro" target="_blank">
+          <img src="images/product1.jpg" alt="T-Shirt" loading="lazy">
+        </a>
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">T-Shirt</h3>
+        <p class="product-price">Price: 50 per pcs. only</p>
+        <a href="https://wa.me/917003263999?text=Hi%20NexShopy,%20I%20want%20to%20order%20T-Shirt%20(50%20per%20pcs.)" 
+           target="_blank" 
+           class="order-button">🛒 Order Now</a>
+      </div>
+    </article>
 
     <!-- Product 2 -->
-    <div class="product-card">
-      <a href="https://www.youtube.com/watch?v=VIDEO_ID_2" target="_blank">
-        <img src="images/product2.jpg" alt="Product 2">
-      </a>
-      <div class="product-name">Fashion Jewellery</div>
-	  <p>Price:150 only</p>
-      <a href="https://wa.me/9170032xxx26?text=Hi%2C%20I%20want%20to%20order%20Product%202" target="_blank" class="order-button">🛒 Order Now</a>
-    </div>
+    <article class="product-card">
+      <div class="product-image-container">
+        <a href="https://www.youtube.com/watch?v=VIDEO_ID_2" target="_blank">
+          <img src="images/product2.jpg" alt="Fashion Jewellery" loading="lazy">
+        </a>
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">Fashion Jewellery</h3>
+        <p class="product-price">Price: 150 only</p>
+        <a href="https://wa.me/917003263999?text=Hi%20NexShopy,%20I%20want%20to%20order%20Fashion%20Jewellery%20(150%20only)" 
+           target="_blank" 
+           class="order-button">🛒 Order Now</a>
+      </div>
+    </article>
 
     <!-- Product 3 -->
-    <div class="product-card">
-      <a href="https://www.youtube.com/watch?v=VIDEO_ID_3" target="_blank">
-        <img src="images/product3.jpg" alt="Product 3">
-      </a>
-      <div class="product-name">Makeup Kit</div>
-	  <p><b>Price:250 only</b></p>
-      <a href="https://wa.me/9170032xxx26?text=Hi%2C%20I%20want%20to%20order%20Product%203" target="_blank" class="order-button">🛒 Order Now</a>
-    </div>
-       <!-- Product 4 -->
-    <div class="product-card">
-      <a href="https://www.youtube.com/watch?v=VIDEO_ID_3" target="_blank">
-        <img src="images/product4.jpg" alt="Product 4">
-      </a>
-      <div class="product-name">Glass hair ring</div>
-	  <p><b>Price:130 only</b></p>
-      <a href="https://wa.me/917003xxx726?text=Hi%2C%20I%20want%20to%20order%20Product%203" target="_blank" class="order-button">🛒 Order Now</a>
-    </div>
-     <!-- Product 5 -->
-    <div class="product-card">
-      <a href="https://www.youtube.com/watch?v=VIDEO_ID_3" target="_blank">
-        <img src="images/product5.jpg" alt="Product 5">
-      </a>
-      <div class="product-name">Joging Shooe</div>
-	  <p><b>Price:350 only</b></p>
-      <a href="https://wa.me/917003xxx726?text=Hi%2C%20I%20want%20to%20order%20Product%203" target="_blank" class="order-button">🛒 Order Now</a>
-    </div>
-	 <!-- Product 6 -->
-    <div class="product-card">
-      <a href="https://www.youtube.com/watch?v=VIDEO_ID_3" target="_blank">
-        <img src="images/product6.jpg" alt="Product 6">
-      </a>
-      <div class="product-name">Lipistick</div>
-	  <p><b>Price:150 only(10 pcs)</b></p>
-      <a href="https://wa.me/91700xxx3726?text=Hi%2C%20I%20want%20to%20order%20Product%203" target="_blank" class="order-button">🛒 Order Now</a>
-    </div>
-    </div>
-     <!-- Footer -->
-<div class="footer">
-  <p><strong>📍 Address:</strong> Vill & PO.:Rajhat, Dist.:Hooghly, PIN.:712123</p>
-  <p><strong>📞 Contact:</strong> +91 9831xxxx65</p>
-  <p>
-    <strong>🔗 Follow us:</strong>
-    <a href="https://www.facebook.com/profile.php?id=61578152637279" target="_blank">
-      <img src="images/facebook.png" alt="Facebook" class="social-icon">
-    </a>
-    <a href="https://www.instagram.com/nexsh0py/" target="_blank">
-      <img src="images/instagram.png" alt="Instagram" class="social-icon">
-    </a>
-  </p>
-  <p class="copyright">© 2025 NexShopy. All rights reserved.</p>
-</div>
-</div>
+    <article class="product-card">
+      <div class="product-image-container">
+        <a href="https://www.youtube.com/watch?v=VIDEO_ID_3" target="_blank">
+          <img src="images/product3.jpg" alt="Makeup Kit" loading="lazy">
+        </a>
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">Makeup Kit</h3>
+        <p class="product-price">Price: 250 only</p>
+        <a href="https://wa.me/917003263999?text=Hi%20NexShopy,%20I%20want%20to%20order%20Makeup%20Kit%20(250%20only)" 
+           target="_blank" 
+           class="order-button">🛒 Order Now</a>
+      </div>
+    </article>
 
+    <!-- Product 4 -->
+    <article class="product-card">
+      <div class="product-image-container">
+        <a href="https://www.youtube.com/watch?v=VIDEO_ID_4" target="_blank">
+          <img src="images/product4.jpg" alt="Glass hair ring" loading="lazy">
+        </a>
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">Glass hair ring</h3>
+        <p class="product-price">Price: 130 only</p>
+        <a href="https://wa.me/917003263999?text=Hi%20NexShopy,%20I%20want%20to%20order%20Glass%20hair%20ring%20(130%20only)" 
+           target="_blank" 
+           class="order-button">🛒 Order Now</a>
+      </div>
+    </article>
+
+    <!-- Product 5 -->
+    <article class="product-card">
+      <div class="product-image-container">
+        <a href="https://www.youtube.com/watch?v=VIDEO_ID_5" target="_blank">
+          <img src="images/product5.jpg" alt="Joging Shoe" loading="lazy">
+        </a>
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">Joging Shoe</h3>
+        <p class="product-price">Price: 350 only</p>
+        <a href="https://wa.me/917003263999?text=Hi%20NexShopy,%20I%20want%20to%20order%20Joging%20Shoe%20(350%20only)" 
+           target="_blank" 
+           class="order-button">🛒 Order Now</a>
+      </div>
+    </article>
+
+    <!-- Product 6 -->
+    <article class="product-card">
+      <div class="product-image-container">
+        <a href="https://www.youtube.com/watch?v=VIDEO_ID_6" target="_blank">
+          <img src="images/product6.jpg" alt="Lipstick" loading="lazy">
+        </a>
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">Lipstick</h3>
+        <p class="product-price">Price: 150 only (1 pcs)</p>
+        <a href="https://wa.me/917003263999?text=Hi%20NexShopy,%20I%20want%20to%20order%20Lipstick%20(150%20only%20for%2010%20pcs)" 
+           target="_blank" 
+           class="order-button">🛒 Order Now</a>
+      </div>
+    </article>
+	<!-- Product 7 -->
+    <article class="product-card">
+      <div class="product-image-container">
+        <a href="https://www.youtube.com/watch?v=VIDEO_ID_6" target="_blank">
+          <img src="images/product7.jpg" alt="Lipstick" loading="lazy">
+        </a>
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">Ladis Bag</h3>
+        <p class="product-price">Price: 100 only (1 pcs)</p>
+        <a href="https://wa.me/917003263999?text=Hi%20NexShopy,%20I%20want%20to%20order%20Lipstick%20(150%20only%20for%2010%20pcs)" 
+           target="_blank" 
+           class="order-button">🛒 Order Now</a>
+      </div>
+  </main>
+
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p><strong>📍 Address:</strong> Vill & PO.: Rajhat, Dist.: Hooghly, PIN.: 712123</p>
+      <p><strong>📞 Contact:</strong> +91 9831681000</p>
+      <div class="footer-links">
+        <strong>🔗 Follow us:</strong>
+        <a href="https://www.facebook.com/profile.php?id=61578152637279" target="_blank" aria-label="Facebook">
+          <img src="images/facebook.png" alt="Facebook" class="social-icon" loading="lazy">
+        </a>
+        <a href="https://www.instagram.com/reel/DL1RVzcIzfn/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==" target="_blank" aria-label="Instagram">
+          <img src="images/instagram.png" alt="Instagram" class="social-icon" loading="lazy">
+        </a>
+        <a href="https://youtube.com/shorts/oBMi1WCXNz0?feature=share" target="_blank" aria-label="YouTube">
+          <img src="images/youtube.png" alt="YouTube" class="social-icon" loading="lazy">
+        </a>
+      </div>
+      <p class="copyright">© 2025 NexShopy. All rights reserved.</p>
+    </div>
+  </footer>
 </body>
 </html>
