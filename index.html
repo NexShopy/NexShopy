@@ -502,27 +502,27 @@ document.addEventListener('DOMContentLoaded', function() {
 <div id="checkoutModal" class="checkout-modal">
   <div class="modal-content">
     <span class="close-modal">&times;</span>
-    <h3>Complete Your Order</h3>
+    <h3>Your Order/আপনার অর্ডার :-</h3>
     
     <div class="modal-body">
       <form id="orderForm">
         <!-- Product Info -->
         <div class="form-section">
           <div class="form-group">
-            <label>Product Name</label>
+            <label>Product Name/প্রোডাক্টের নাম: </label>
             <input type="text" id="modalProductName" readonly>
           </div>
           <div class="form-group">
-            <label>Product Code (Optional)</label>
+            <label>Product Code/প্রোডাক্ট কোড: (প্রোডাক্ট ভিডিও অনুসারে)</label>
             <input type="text" id="productCode" placeholder="Enter product code if available">
           </div>
           <div class="form-group">
-            <label>Price</label>
+            <label>Price/দাম:</label>
             <input type="text" id="modalProductPrice" readonly>
-            <p class="price-note">** Price excludes packaging & delivery</p>
+            <p class="price-note">**Price excludes packaging & delivery/দামের মধ্যে প্যাকেজিং এবং ডেলিভারি অন্তর্ভুক্ত নেই |</p>
           </div>
           <div class="form-group">
-            <label>Quantity</label>
+            <label>Quantity/পরিমাণ :</label>
             <div class="qty-controls">
               <button type="button" class="qty-btn minus">-</button>
               <input type="number" id="productQty" value="1" min="1" max="10">
@@ -533,15 +533,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
         <!-- Customer Info -->
         <div class="form-section">
-          <h4>Your Details</h4>
+          <h4>Your Details/আপনার বিবরণ</h4>
           <div class="form-group">
-            <input type="text" id="customerName" placeholder="Full Name*" required>
+            <input type="text" id="customerName" placeholder="আপনার নাম/ Full Name:*" required>
           </div>
           <div class="form-group">
-            <input type="tel" id="customerPhone" placeholder="Phone Number*" required>
+            <input type="tel" id="customerPhone" placeholder="মোবাইল নম্বর/ Mobile Number:*" required>
           </div>
           <div class="form-group">
-            <textarea id="customerAddress" placeholder="Address*" rows="2" required></textarea>
+            <textarea id="customerAddress" placeholder="ঠিকানা /Address:*" rows="2" required></textarea>
           </div>
         </div>
 
@@ -549,17 +549,17 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="form-section">
           <h4>Additional Information</h4>
           <div class="form-group">
-            <input type="text" id="distributorCode" placeholder="Distributor/Referral Code (Optional)">
+            <input type="text" id="distributorCode" placeholder="Distributor/Referral Code (যদি আপনার জানা থাকে)">
           </div>
         </div>
 
         <!-- Payment -->
         <div class="form-section">
-          <h4>Payment Method</h4>
+          <h4>Payment Method/পেমেন্ট পদ্ধতি:</h4>
           <div class="payment-options">
             <label class="payment-option">
               <input type="radio" name="payment" value="Cash on Delivery" checked>
-              <span>Cash on Delivery</span>
+              <span>Cash and carry</span>
             </label>
             <label class="payment-option">
               <input type="radio" name="payment" value="UPI Payment">
@@ -572,7 +572,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     <div class="modal-footer">
       <button type="submit" form="orderForm" class="submit-order-btn">
-        Complete Order
+        Complete Order/অর্ডার সম্পূর্ণ করুন :
       </button>
     </div>
   </div>
