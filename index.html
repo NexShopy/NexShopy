@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NexShopy — যেখানে বারো মাস চৈত্র মাস</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
       --primary-color: #25D366;
@@ -57,6 +58,40 @@
       text-align: center;
       margin: 15px 0;
     }
+    
+    /* Social Icons in Header */
+    .social-icons-header {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 15px;
+      z-index: 10;
+    }
+    
+    .social-icons-header a {
+      color: var(--text-medium);
+      font-size: 20px;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.8);
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .social-icons-header a:hover {
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .social-icons-header a:nth-child(1):hover { background: #3b5998; } /* Facebook */
+    .social-icons-header a:nth-child(2):hover { background: #E1306C; } /* Instagram */
+    .social-icons-header a:nth-child(3):hover { background: #FF0000; } /* YouTube */
     
     /* Search Bar */
     .search-container {
@@ -251,6 +286,14 @@
     .footer-links a {
       display: inline-block;
       margin: 0 12px;
+      color: var(--text-medium);
+      font-size: 24px;
+      transition: all 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: var(--primary-color);
+      transform: translateY(-3px);
     }
     
     .copyright {
@@ -267,10 +310,177 @@
       font-weight: bold;
     }
     
+    /* Modal Styles */
+    .checkout-modal {
+      display: none;
+      position: fixed;
+      z-index: 10000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
+    }
+    
+    .modal-content {
+      background-color: white;
+      margin: 2% auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 450px;
+      max-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    .modal-body {
+      overflow-y: auto;
+      padding-right: 10px;
+      flex: 1;
+    }
+    
+    /* Scrollbar styling */
+    .modal-body::-webkit-scrollbar {
+      width: 6px;
+    }
+    .modal-body::-webkit-scrollbar-thumb {
+      background: #25D366;
+      border-radius: 3px;
+    }
+    
+    .close-modal {
+      color: #aaa;
+      float: right;
+      font-size: 24px;
+      cursor: pointer;
+      margin-top: -10px;
+    }
+    
+    /* Form Styles */
+    .form-section {
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .form-section:last-child {
+      border-bottom: none;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+    
+    input, textarea, select {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+    
+    .price-note {
+      font-size: 12px;
+      color: #666;
+      margin-top: 3px;
+    }
+    
+    /* Quantity Selector */
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 5px;
+    }
+    
+    .qty-btn {
+      width: 30px;
+      height: 30px;
+      background: #25D366;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      padding: 0;
+    }
+    
+    #productQty {
+      width: 50px;
+      text-align: center;
+      margin: 0;
+      padding: 5px;
+    }
+    
+    /* Payment Options */
+    .payment-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 5px;
+    }
+    
+    .payment-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+    }
+    
+    .payment-option input[type="radio"] {
+      margin: 0;
+      width: auto;
+    }
+    
+    /* Submit Button */
+    .modal-footer {
+      padding-top: 15px;
+      border-top: 1px solid #eee;
+    }
+    
+    .submit-order-btn {
+      background-color: #25D366;
+      color: white;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      border-radius: 5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .submit-order-btn:hover {
+      background-color: #128C7E;
+    }
+    
     /* Responsive Adjustments */
     @media (max-width: 768px) {
       .gradient-tagline {
         font-size: 1.8rem;
+      }
+      
+      .social-icons-header {
+        top: 15px;
+        right: 15px;
+        gap: 10px;
+      }
+      
+      .social-icons-header a {
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
       }
       
       .gallery {
@@ -309,171 +519,20 @@
       .footer {
         padding: 30px 20px;
       }
+      
+      .social-icons-header {
+        top: 10px;
+        right: 10px;
+        gap: 8px;
+      }
+      
+      .social-icons-header a {
+        width: 28px;
+        height: 28px;
+        font-size: 16px;
+      }
     }
   </style>
-  <style>
-/* Modal Styles */
-.checkout-modal {
-  display: none;
-  position: fixed;
-  z-index: 10000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.7);
-}
-
-.modal-content {
-  background-color: white;
-  margin: 2% auto;
-  padding: 20px;
-  border-radius: 10px;
-  width: 90%;
-  max-width: 450px;
-  max-height: 80vh;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-.modal-body {
-  overflow-y: auto;
-  padding-right: 10px;
-  flex: 1;
-}
-
-/* Scrollbar styling */
-.modal-body::-webkit-scrollbar {
-  width: 6px;
-}
-.modal-body::-webkit-scrollbar-thumb {
-  background: #25D366;
-  border-radius: 3px;
-}
-
-.close-modal {
-  color: #aaa;
-  float: right;
-  font-size: 24px;
-  cursor: pointer;
-  margin-top: -10px;
-}
-
-/* Form Styles */
-.form-section {
-  margin-bottom: 15px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid #eee;
-}
-
-.form-section:last-child {
-  border-bottom: none;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-  font-size: 14px;
-}
-
-input, textarea, select {
-  width: 100%;
-  padding: 8px 12px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 14px;
-}
-
-.price-note {
-  font-size: 12px;
-  color: #666;
-  margin-top: 3px;
-}
-
-/* Quantity Selector - Fixed Alignment */
-.qty-controls {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 5px;
-}
-
-.qty-btn {
-  width: 30px;
-  height: 30px;
-  background: #25D366;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  padding: 0;
-}
-
-#productQty {
-  width: 50px;
-  text-align: center;
-  margin: 0;
-  padding: 5px;
-}
-
-/* Payment Options - Fixed Alignment */
-.payment-options {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 5px;
-}
-
-.payment-option {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 14px;
-}
-
-.payment-option input[type="radio"] {
-  margin: 0;
-  width: auto;
-}
-
-/* Submit Button */
-.modal-footer {
-  padding-top: 15px;
-  border-top: 1px solid #eee;
-}
-
-.submit-order-btn {
-  background-color: #25D366;
-  color: white;
-  border: none;
-  padding: 10px;
-  width: 100%;
-  border-radius: 5px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.submit-order-btn:hover {
-  background-color: #128C7E;
-}
-
-@media (max-height: 700px) {
-  .modal-content {
-    max-height: 85vh;
-    margin: 1% auto;
-  }
-}
-</style>
 </head>
 <body>
   <!-- WhatsApp Floating Button -->
@@ -483,6 +542,19 @@ input, textarea, select {
 
   <!-- Header Section -->
   <header class="header">
+    <!-- Social Media Icons -->
+    <div class="social-icons-header">
+      <a href="https://www.facebook.com/profile.php?id=61578152637279" target="_blank" aria-label="Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://www.instagram.com/reel/DL1RVzcIzfn/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==" target="_blank" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://youtube.com/shorts/oBMi1WCXNz0?feature=share" target="_blank" aria-label="YouTube">
+        <i class="fab fa-youtube"></i>
+      </a>
+    </div>
+    
     <img src="images/logo.png" alt="NexShopy Logo" class="big-logo" loading="lazy">
     <h1 class="gradient-tagline">যেখানে বারো মাস চৈত্র মাস</h1>
   </header>
@@ -615,14 +687,14 @@ input, textarea, select {
       <p><strong>📞 Contact:</strong> +91 8100515783</p>
       <div class="footer-links">
         <strong>🔗 Follow us:</strong>
-        <a href="https://www.facebook.com/profile.php?id=61578152637279" target="_blank">
-          <img src="images/facebook.png" alt="Facebook" class="social-icon" loading="lazy">
+        <a href="https://www.facebook.com/profile.php?id=61578152637279" target="_blank" aria-label="Facebook">
+          <i class="fab fa-facebook-f"></i>
         </a>
-        <a href="https://www.instagram.com/reel/DL1RVzcIzfn/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==" target="_blank">
-          <img src="images/instagram.png" alt="Instagram" class="social-icon" loading="lazy">
+        <a href="https://www.instagram.com/reel/DL1RVzcIzfn/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==" target="_blank" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
         </a>
-        <a href="https://youtube.com/shorts/oBMi1WCXNz0?feature=share" target="_blank">
-          <img src="images/youtube.png" alt="YouTube" class="social-icon" loading="lazy">
+        <a href="https://youtube.com/shorts/oBMi1WCXNz0?feature=share" target="_blank" aria-label="YouTube">
+          <i class="fab fa-youtube"></i>
         </a>
       </div>
       <p class="copyright">© 2025 NexShopy. All rights reserved.</p>
