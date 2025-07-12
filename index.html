@@ -58,36 +58,45 @@
       margin: 15px 0;
     }
     
-    /* Social Icons */
-    .social-icons-top {
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
+    /* Search Bar */
+    .search-container {
       display: flex;
-      gap: 20px;
-      z-index: 100;
+      margin: 0 auto 30px;
+      max-width: 500px;
+      padding: 0 20px;
     }
     
-    .social-icon {
-      width: 30px;
-      height: 30px;
+    #searchInput {
+      flex: 1;
+      padding: 12px 20px;
+      border: 1px solid #ddd;
+      border-radius: 30px 0 0 30px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      outline: none;
+    }
+    
+    #searchButton {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 0 30px 30px 0;
+      padding: 0 25px;
       cursor: pointer;
-      transition: all 0.3s ease;
-      border-radius: 50%;
+      font-weight: 600;
+      transition: background-color 0.3s;
     }
     
-    .social-icon:hover {
-      transform: scale(1.15) translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    #searchButton:hover {
+      background-color: #128C7E;
     }
     
     /* Product Gallery */
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 30px;
-      padding: 30px 20px;
+      padding: 0 20px 40px;
       max-width: 1200px;
       margin: 0 auto;
     }
@@ -99,11 +108,10 @@
       overflow: hidden;
       text-align: center;
       transition: all 0.3s ease;
-      position: relative;
     }
     
     .product-card:hover {
-      transform: translateY(-8px);
+      transform: translateY(-5px);
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
     }
     
@@ -132,9 +140,21 @@
     
     .product-name {
       font-weight: 600;
-      margin-bottom: 8px;
+      margin-bottom: 5px;
       color: var(--text-dark);
       font-size: 1.1rem;
+    }
+    
+    .product-code {
+      font-family: monospace;
+      background: #f5f5f5;
+      padding: 3px 8px;
+      display: inline-block;
+      border-radius: 4px;
+      color: #d63384;
+      font-weight: bold;
+      margin-bottom: 8px;
+      font-size: 14px;
     }
     
     .product-price {
@@ -142,6 +162,13 @@
       font-weight: 600;
       margin-bottom: 15px;
       font-size: 1rem;
+    }
+    
+    .product-description {
+      color: var(--text-medium);
+      font-size: 14px;
+      margin-bottom: 15px;
+      min-height: 40px;
     }
     
     .order-button {
@@ -163,6 +190,34 @@
       background-color: #1ebe5b;
       transform: translateY(-2px);
       box-shadow: 0 6px 12px rgba(37, 211, 102, 0.3);
+    }
+    
+    /* WhatsApp Floating Button */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background-color: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      z-index: 100;
+      transition: all 0.3s ease;
+    }
+    
+    .whatsapp-float:hover {
+      background-color: #128C7E;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
+    
+    .whatsapp-float img {
+      width: 35px;
+      height: 35px;
     }
     
     /* Footer Styles */
@@ -204,6 +259,14 @@
       color: var(--text-light);
     }
     
+    /* Highlight for Search Results */
+    .highlight {
+      background-color: #ffeb3b;
+      padding: 0 2px;
+      border-radius: 2px;
+      font-weight: bold;
+    }
+    
     /* Responsive Adjustments */
     @media (max-width: 768px) {
       .gradient-tagline {
@@ -211,46 +274,40 @@
       }
       
       .gallery {
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
         gap: 20px;
-        padding: 20px 15px;
       }
       
       .product-image-container {
         height: 200px;
       }
+      
+      .whatsapp-float {
+        width: 50px;
+        height: 50px;
+      }
+      
+      .whatsapp-float img {
+        width: 30px;
+        height: 30px;
+      }
     }
     
     @media (max-width: 480px) {
-      .header {
-        padding-top: 80px;
-        padding-bottom: 25px;
-      }
-      
       .gradient-tagline {
         font-size: 1.5rem;
       }
       
-      .social-icons-top {
-        gap: 15px;
-        top: 15px;
+      .search-container {
+        padding: 0 15px;
       }
       
-      .social-icon {
-        width: 26px;
-        height: 26px;
+      #searchInput {
+        padding: 10px 15px;
       }
       
       .footer {
         padding: 30px 20px;
-      }
-      
-      .footer p {
-        font-size: 0.9rem;
-      }
-      
-      .footer-links a {
-        margin: 0 8px;
       }
     }
   </style>
@@ -417,184 +474,25 @@ input, textarea, select {
   }
 }
 </style>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const modal = document.getElementById('checkoutModal');
-  const orderForm = document.getElementById('orderForm');
-  
-  // Order button click handler
-  document.querySelectorAll('.order-button').forEach(button => {
-    button.addEventListener('click', function(e) {
-      e.preventDefault();
-      
-      const productCard = this.closest('.product-card');
-      const productName = productCard.querySelector('.product-name').textContent;
-      const productPrice = productCard.querySelector('.product-price').textContent;
-      
-      document.getElementById('modalProductName').value = productName;
-      document.getElementById('modalProductPrice').value = productPrice;
-      
-      modal.style.display = 'block';
-      document.body.style.overflow = 'hidden';
-    });
-  });
-  
-  // Quantity controls
-  document.querySelector('.qty-btn.minus').addEventListener('click', function() {
-    const qtyInput = document.getElementById('productQty');
-    if (qtyInput.value > 1) qtyInput.value--;
-  });
-  
-  document.querySelector('.qty-btn.plus').addEventListener('click', function() {
-    const qtyInput = document.getElementById('productQty');
-    if (qtyInput.value < 10) qtyInput.value++;
-  });
-  
-  // Close modal
-  document.querySelector('.close-modal').addEventListener('click', closeModal);
-  window.addEventListener('click', function(e) {
-    if (e.target === modal) closeModal();
-  });
-  
-  // Form submission
-  orderForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const productName = document.getElementById('modalProductName').value;
-    const productCode = document.getElementById('productCode').value || "N/A";
-    const productPrice = document.getElementById('modalProductPrice').value;
-    const quantity = document.getElementById('productQty').value;
-    const customerName = document.getElementById('customerName').value;
-    const customerPhone = document.getElementById('customerPhone').value;
-    const customerAddress = document.getElementById('customerAddress').value;
-    const distributorCode = document.getElementById('distributorCode').value || "N/A";
-    const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
-    
-    const priceValue = parseFloat(productPrice.replace(/[^\d.]/g, ''));
-    const total = (priceValue * quantity).toFixed(2);
-    
-    const message = `*NEW ORDER*%0A%0A` +
-                   `*Product:* ${productName}%0A` +
-                   `*Code:* ${productCode}%0A` +
-                   `*Price:* ${productPrice}%0A` +
-                   `*Qty:* ${quantity}%0A` +
-                   `*Total:* ₹${total}%0A%0A` +
-                   `*Customer:* ${customerName}%0A` +
-                   `*Phone:* ${customerPhone}%0A` +
-                   `*Address:* ${customerAddress}%0A%0A` +
-                   `*Distributor Code:* ${distributorCode}%0A` +
-                   `*Payment:* ${paymentMethod}%0A%0A` +
-                   `**Price excludes packaging & delivery`;
-    
-    window.open(`https://wa.me/917003263726?text=${message}`, '_blank');
-    closeModal();
-    orderForm.reset();
-  });
-  
-  function closeModal() {
-    document.getElementById('checkoutModal').style.display = 'none';
-    document.body.style.overflow = 'auto';
-  }
-});
-</script>
 </head>
-<div id="checkoutModal" class="checkout-modal">
-  <div class="modal-content">
-    <span class="close-modal">&times;</span>
-    <h3>Your Order/আপনার অর্ডার :-</h3>
-    
-    <div class="modal-body">
-      <form id="orderForm">
-        <!-- Product Info -->
-        <div class="form-section">
-          <div class="form-group">
-            <label>Product Name/প্রোডাক্টের নাম: </label>
-            <input type="text" id="modalProductName" readonly>
-          </div>
-          <div class="form-group">
-            <label>Product Code/প্রোডাক্ট কোড: (প্রোডাক্ট ভিডিও অনুসারে)</label>
-            <input type="text" id="productCode" placeholder="Enter product code if available">
-          </div>
-          <div class="form-group">
-            <label>Price/দাম:</label>
-            <input type="text" id="modalProductPrice" readonly>
-            <p class="price-note">**Price excludes packaging & delivery/দামের মধ্যে প্যাকেজিং এবং ডেলিভারি অন্তর্ভুক্ত নেই |</p>
-          </div>
-          <div class="form-group">
-            <label>Quantity/পরিমাণ :</label>
-            <div class="qty-controls">
-              <button type="button" class="qty-btn minus">-</button>
-              <input type="number" id="productQty" value="1" min="1" max="10">
-              <button type="button" class="qty-btn plus">+</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Customer Info -->
-        <div class="form-section">
-          <h4>Your Details/আপনার বিবরণ</h4>
-          <div class="form-group">
-            <input type="text" id="customerName" placeholder="আপনার নাম/ Full Name:*" required>
-          </div>
-          <div class="form-group">
-            <input type="tel" id="customerPhone" placeholder="মোবাইল নম্বর/ Mobile Number:*" required>
-          </div>
-          <div class="form-group">
-            <textarea id="customerAddress" placeholder="ঠিকানা /Address:*" rows="2" required></textarea>
-          </div>
-        </div>
-
-        <!-- Optional Fields -->
-        <div class="form-section">
-          <h4>Additional Information</h4>
-          <div class="form-group">
-            <input type="text" id="distributorCode" placeholder="Distributor/Referral Code (যদি আপনার জানা থাকে)">
-          </div>
-        </div>
-
-        <!-- Payment -->
-        <div class="form-section">
-          <h4>Payment Method/পেমেন্ট পদ্ধতি:</h4>
-          <div class="payment-options">
-            <label class="payment-option">
-              <input type="radio" name="payment" value="Cash on Delivery" checked>
-              <span>Cash and carry</span>
-            </label>
-            <label class="payment-option">
-              <input type="radio" name="payment" value="UPI Payment">
-              <span>UPI Payment</span>
-            </label>
-          </div>
-        </div>
-      </form>
-    </div>
-    
-    <div class="modal-footer">
-      <button type="submit" form="orderForm" class="submit-order-btn">
-        Complete Order/অর্ডার সম্পূর্ণ করুন :
-      </button>
-    </div>
-  </div>
-</div>
 <body>
-  <!-- Social Icons -->
-  <div class="social-icons-top">
-    <a href="https://facebook.com/profile.php?id=61578152637279" target="_blank" aria-label="Facebook">
-      <img src="images/facebook.png" alt="Facebook" class="social-icon" loading="lazy">
-    </a>
-    <a href="https://www.instagram.com/reel/DL1RVzcIzfn/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==" target="_blank" aria-label="Instagram">
-      <img src="images/instagram.png" alt="Instagram" class="social-icon" loading="lazy">
-    </a>
-    <a href="https://youtube.com/shorts/oBMi1WCXNz0?feature=share" target="_blank" aria-label="YouTube">
-      <img src="images/youtube.png" alt="YouTube" class="social-icon" loading="lazy">
-    </a>
-  </div>
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/918100515783" class="whatsapp-float" target="_blank">
+    <img src="images/whatsapp-icon.png" alt="Chat on WhatsApp">
+  </a>
+
   <!-- Header Section -->
   <header class="header">
     <img src="images/logo.png" alt="NexShopy Logo" class="big-logo" loading="lazy">
     <h1 class="gradient-tagline">যেখানে বারো মাস চৈত্র মাস</h1>
   </header>
+
+  <!-- Search Bar -->
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search by name (min 3 letters), code, or price...">
+    <button id="searchButton">Search</button>
+  </div>
+
   <!-- Product Gallery -->
   <main class="gallery">
     <!-- Product 1 -->
@@ -606,12 +504,13 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
       <div class="product-info">
         <h3 class="product-name">T-Shirt</h3>
-        <p class="product-price">Price: 50 per pcs. only</p>
-        <a href="https://wa.me/917003263726?text=Hi%20NexShopy,%20I%20want%20to%20order%20T-Shirt%20(50%20per%20pcs.)" 
-           target="_blank" 
-           class="order-button">🛒 Order Now</a>
+        <div class="product-code">CODE: TS-001</div>
+        <p class="product-price">Price: ₹50 per pcs.</p>
+        <p class="product-description">Premium quality cotton t-shirt with unique print</p>
+        <button class="order-button">🛒 Order Now</button>
       </div>
     </article>
+
     <!-- Product 2 -->
     <article class="product-card">
       <div class="product-image-container">
@@ -621,12 +520,13 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
       <div class="product-info">
         <h3 class="product-name">Fashion Jewellery</h3>
-        <p class="product-price">Price: 150 only</p>
-        <a href="https://wa.me/917003263726?text=Hi%20NexShopy,%20I%20want%20to%20order%20Fashion%20Jewellery%20(150%20only)" 
-           target="_blank" 
-           class="order-button">🛒 Order Now</a>
+        <div class="product-code">CODE: FJ-045</div>
+        <p class="product-price">Price: ₹150</p>
+        <p class="product-description">Elegant silver-plated necklace set</p>
+        <button class="order-button">🛒 Order Now</button>
       </div>
     </article>
+
     <!-- Product 3 -->
     <article class="product-card">
       <div class="product-image-container">
@@ -636,10 +536,10 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
       <div class="product-info">
         <h3 class="product-name">Makeup Kit</h3>
-        <p class="product-price">Price: 250 only</p>
-        <a href="https://wa.me/917003263726?text=Hi%20NexShopy,%20I%20want%20to%20order%20Makeup%20Kit%20(250%20only)" 
-           target="_blank" 
-           class="order-button">🛒 Order Now</a>
+        <div class="product-code">CODE: MK-789</div>
+        <p class="product-price">Price: ₹250</p>
+        <p class="product-description">Complete makeup set with brushes</p>
+        <button class="order-button">🛒 Order Now</button>
       </div>
     </article>
 
@@ -652,10 +552,10 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
       <div class="product-info">
         <h3 class="product-name">Glass hair ring</h3>
-        <p class="product-price">Price: 130 only</p>
-        <a href="https://wa.me/917003263726?text=Hi%20NexShopy,%20I%20want%20to%20order%20Glass%20hair%20ring%20(130%20only)" 
-           target="_blank" 
-           class="order-button">🛒 Order Now</a>
+        <div class="product-code">CODE: GHR-130</div>
+        <p class="product-price">Price: ₹130</p>
+        <p class="product-description">Beautiful glass hair accessories</p>
+        <button class="order-button">🛒 Order Now</button>
       </div>
     </article>
 
@@ -668,10 +568,10 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
       <div class="product-info">
         <h3 class="product-name">Joging Shoe</h3>
-        <p class="product-price">Price: 350 only</p>
-        <a href="https://wa.me/917003263726?text=Hi%20NexShopy,%20I%20want%20to%20order%20Joging%20Shoe%20(350%20only)" 
-           target="_blank" 
-           class="order-button">🛒 Order Now</a>
+        <div class="product-code">CODE: JS-350</div>
+        <p class="product-price">Price: ₹350</p>
+        <p class="product-description">Comfortable running shoes</p>
+        <button class="order-button">🛒 Order Now</button>
       </div>
     </article>
 
@@ -684,46 +584,273 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
       <div class="product-info">
         <h3 class="product-name">Lipstick</h3>
-        <p class="product-price">Price: 150 only (1 pcs)</p>
-        <a href="https://wa.me/917003263726?text=Hi%20NexShopy,%20I%20want%20to%20order%20Lipstick%20(150%20only%20for%2010%20pcs)" 
-           target="_blank" 
-           class="order-button">🛒 Order Now</a>
+        <div class="product-code">CODE: LP-150</div>
+        <p class="product-price">Price: ₹150 (1 pcs)</p>
+        <p class="product-description">Long-lasting matte lipstick</p>
+        <button class="order-button">🛒 Order Now</button>
       </div>
     </article>
-	<!-- Product 7 -->
+
+    <!-- Product 7 -->
     <article class="product-card">
       <div class="product-image-container">
-        <a href="https://www.youtube.com/watch?v=VIDEO_ID_6" target="_blank">
-          <img src="images/product7.jpg" alt="Lipstick" loading="lazy">
+        <a href="https://www.youtube.com/watch?v=VIDEO_ID_7" target="_blank">
+          <img src="images/product7.jpg" alt="Ladies Bag" loading="lazy">
         </a>
       </div>
       <div class="product-info">
-        <h3 class="product-name">Ladis Bag</h3>
-        <p class="product-price">Price: 100 only (1 pcs)</p>
-        <a href="https://wa.me/917003263726?text=Hi%20NexShopy,%20I%20want%20to%20order%20Lipstick%20(150%20only%20for%2010%20pcs)" 
-           target="_blank" 
-           class="order-button">🛒 Order Now</a>
+        <h3 class="product-name">Ladies Bag</h3>
+        <div class="product-code">CODE: LB-100</div>
+        <p class="product-price">Price: ₹100 (1 pcs)</p>
+        <p class="product-description">Stylish handbag for women</p>
+        <button class="order-button">🛒 Order Now</button>
       </div>
+    </article>
   </main>
+
   <!-- Footer -->
   <footer class="footer">
     <div class="footer-content">
       <p><strong>📍 Address:</strong> Vill & PO.: Rajhat, Dist.: Hooghly, PIN.: 712123</p>
-      <p><strong>📞 Contact:</strong> +91 9831681000</p>
+      <p><strong>📞 Contact:</strong> +91 8100515783</p>
       <div class="footer-links">
         <strong>🔗 Follow us:</strong>
-        <a href="https://www.facebook.com/profile.php?id=61578152637279" target="_blank" aria-label="Facebook">
+        <a href="https://www.facebook.com/profile.php?id=61578152637279" target="_blank">
           <img src="images/facebook.png" alt="Facebook" class="social-icon" loading="lazy">
         </a>
-        <a href="https://www.instagram.com/reel/DL1RVzcIzfn/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==" target="_blank" aria-label="Instagram">
+        <a href="https://www.instagram.com/reel/DL1RVzcIzfn/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==" target="_blank">
           <img src="images/instagram.png" alt="Instagram" class="social-icon" loading="lazy">
         </a>
-        <a href="https://youtube.com/shorts/oBMi1WCXNz0?feature=share" target="_blank" aria-label="YouTube">
+        <a href="https://youtube.com/shorts/oBMi1WCXNz0?feature=share" target="_blank">
           <img src="images/youtube.png" alt="YouTube" class="social-icon" loading="lazy">
         </a>
       </div>
       <p class="copyright">© 2025 NexShopy. All rights reserved.</p>
     </div>
   </footer>
+
+  <!-- Checkout Modal -->
+  <div id="checkoutModal" class="checkout-modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h3>Your Order/আপনার অর্ডার :-</h3>
+      
+      <div class="modal-body">
+        <form id="orderForm">
+          <!-- Product Info -->
+          <div class="form-section">
+            <div class="form-group">
+              <label>Product Name/প্রোডাক্টের নাম: </label>
+              <input type="text" id="modalProductName" readonly>
+            </div>
+            <div class="form-group">
+              <label>Product Code/প্রোডাক্ট কোড: (প্রোডাক্ট ভিডিও অনুসারে)</label>
+              <input type="text" id="productCode" placeholder="Enter product code if available">
+            </div>
+            <div class="form-group">
+              <label>Price/দাম:</label>
+              <input type="text" id="modalProductPrice" readonly>
+              <p class="price-note">**Price excludes packaging & delivery/দামের মধ্যে প্যাকেজিং এবং ডেলিভারি অন্তর্ভুক্ত নেই |</p>
+            </div>
+            <div class="form-group">
+              <label>Quantity/পরিমাণ :</label>
+              <div class="qty-controls">
+                <button type="button" class="qty-btn minus">-</button>
+                <input type="number" id="productQty" value="1" min="1" max="10">
+                <button type="button" class="qty-btn plus">+</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Customer Info -->
+          <div class="form-section">
+            <h4>Your Details/আপনার বিবরণ</h4>
+            <div class="form-group">
+              <input type="text" id="customerName" placeholder="আপনার নাম/ Full Name:*" required>
+            </div>
+            <div class="form-group">
+              <input type="tel" id="customerPhone" placeholder="মোবাইল নম্বর/ Mobile Number:*" required>
+            </div>
+            <div class="form-group">
+              <textarea id="customerAddress" placeholder="ঠিকানা /Address:*" rows="2" required></textarea>
+            </div>
+          </div>
+
+          <!-- Optional Fields -->
+          <div class="form-section">
+            <h4>Additional Information</h4>
+            <div class="form-group">
+              <input type="text" id="distributorCode" placeholder="Distributor/Referral Code (যদি আপনার জানা থাকে)">
+            </div>
+          </div>
+
+          <!-- Payment -->
+          <div class="form-section">
+            <h4>Payment Method/পেমেন্ট পদ্ধতি:</h4>
+            <div class="payment-options">
+              <label class="payment-option">
+                <input type="radio" name="payment" value="Cash on Delivery" checked>
+                <span>Cash and carry</span>
+              </label>
+              <label class="payment-option">
+                <input type="radio" name="payment" value="UPI Payment">
+                <span>UPI Payment</span>
+              </label>
+            </div>
+          </div>
+        </form>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="submit" form="orderForm" class="submit-order-btn">
+          Complete Order/অর্ডার সম্পূর্ণ করুন :
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Search functionality
+      const searchInput = document.getElementById('searchInput');
+      const searchButton = document.getElementById('searchButton');
+      const productCards = document.querySelectorAll('.product-card');
+      
+      searchButton.addEventListener('click', performSearch);
+      searchInput.addEventListener('keyup', function(e) {
+        if (e.key === 'Enter') performSearch();
+      });
+    
+      function performSearch() {
+        const searchTerm = searchInput.value.trim();
+        const isPriceSearch = !isNaN(searchTerm);
+        
+        productCards.forEach(card => {
+          const productName = card.querySelector('.product-name').textContent.toLowerCase();
+          const productCode = card.querySelector('.product-code').textContent.split(':')[1].trim().toLowerCase();
+          const productPrice = parsePrice(card.querySelector('.product-price').textContent);
+          const searchTermLower = searchTerm.toLowerCase();
+          
+          // Check different search conditions
+          const isNameMatch = searchTerm.length >= 3 && productName.includes(searchTermLower);
+          const isCodeMatch = productCode === searchTermLower;
+          const isPriceMatch = isPriceSearch && productPrice === parseFloat(searchTerm);
+          
+          const shouldShow = isNameMatch || isCodeMatch || isPriceMatch;
+          
+          card.style.display = shouldShow ? 'block' : 'none';
+          
+          if (shouldShow) {
+            highlightMatches(card, searchTerm);
+          } else {
+            removeHighlights(card);
+          }
+        });
+      }
+    
+      function parsePrice(priceText) {
+        // Extract numeric value from price text (e.g., "Price: ₹500" → 500)
+        return parseFloat(priceText.replace(/[^\d.]/g, ''));
+      }
+    
+      function highlightMatches(card, term) {
+        const elements = card.querySelectorAll('.product-name, .product-code, .product-price');
+        const regex = new RegExp(term, 'gi');
+        
+        elements.forEach(el => {
+          el.innerHTML = el.textContent.replace(regex, match => 
+            `<span class="highlight">${match}</span>`
+          );
+        });
+      }
+    
+      function removeHighlights(card) {
+        card.querySelectorAll('.highlight').forEach(hl => {
+          hl.outerHTML = hl.textContent;
+        });
+      }
+      
+      // Checkout modal functionality
+      const modal = document.getElementById('checkoutModal');
+      const orderForm = document.getElementById('orderForm');
+      
+      // Order button click handler
+      document.querySelectorAll('.order-button').forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          const productCard = this.closest('.product-card');
+          const productName = productCard.querySelector('.product-name').textContent;
+          const productPrice = productCard.querySelector('.product-price').textContent;
+          const productCode = productCard.querySelector('.product-code').textContent.split(':')[1].trim();
+          
+          document.getElementById('modalProductName').value = productName;
+          document.getElementById('modalProductPrice').value = productPrice;
+          document.getElementById('productCode').value = productCode;
+          
+          modal.style.display = 'block';
+          document.body.style.overflow = 'hidden';
+        });
+      });
+      
+      // Quantity controls
+      document.querySelector('.qty-btn.minus').addEventListener('click', function() {
+        const qtyInput = document.getElementById('productQty');
+        if (qtyInput.value > 1) qtyInput.value--;
+      });
+      
+      document.querySelector('.qty-btn.plus').addEventListener('click', function() {
+        const qtyInput = document.getElementById('productQty');
+        if (qtyInput.value < 10) qtyInput.value++;
+      });
+      
+      // Close modal
+      document.querySelector('.close-modal').addEventListener('click', closeModal);
+      window.addEventListener('click', function(e) {
+        if (e.target === modal) closeModal();
+      });
+      
+      // Form submission
+      orderForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const productName = document.getElementById('modalProductName').value;
+        const productCode = document.getElementById('productCode').value || "N/A";
+        const productPrice = document.getElementById('modalProductPrice').value;
+        const quantity = document.getElementById('productQty').value;
+        const customerName = document.getElementById('customerName').value;
+        const customerPhone = document.getElementById('customerPhone').value;
+        const customerAddress = document.getElementById('customerAddress').value;
+        const distributorCode = document.getElementById('distributorCode').value || "N/A";
+        const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+        
+        const priceValue = parseFloat(productPrice.replace(/[^\d.]/g, ''));
+        const total = (priceValue * quantity).toFixed(2);
+        
+        const message = `*NEW ORDER*%0A%0A` +
+                       `*Product:* ${productName}%0A` +
+                       `*Code:* ${productCode}%0A` +
+                       `*Price:* ${productPrice}%0A` +
+                       `*Qty:* ${quantity}%0A` +
+                       `*Total:* ₹${total}%0A%0A` +
+                       `*Customer:* ${customerName}%0A` +
+                       `*Phone:* ${customerPhone}%0A` +
+                       `*Address:* ${customerAddress}%0A%0A` +
+                       `*Distributor Code:* ${distributorCode}%0A` +
+                       `*Payment:* ${paymentMethod}%0A%0A` +
+                       `**Price excludes packaging & delivery`;
+        
+        window.open(`https://wa.me/918100515783?text=${message}`, '_blank');
+        closeModal();
+        orderForm.reset();
+      });
+      
+      function closeModal() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+    });
+  </script>
 </body>
 </html>
