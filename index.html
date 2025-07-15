@@ -1,17 +1,803 @@
-<div class="footer-section">
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NexShopy - আপনার পছন্দের অনলাইন শপিং</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', 'Nirmala UI', sans-serif;
+      background-color: #FFFFFF;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      position: relative;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background-color: #fdd29a;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    header img {
+      height: 120px;
+      transition: transform 0.3s;
+    }
+    header img:hover {
+      transform: scale(1.05);
+    }
+    .tagline {
+      text-align: center;
+      font-size: 35px;
+      font-weight: bold;
+      background: linear-gradient(90deg, #de3163, #75e3b8, #ffc400, #75e3b8, #de3163);
+      background-size: 300% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: shine 4s linear infinite;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      padding: 10px 20px;
+      line-height: 1.4;
+    }
+    @keyframes shine {
+      0% {
+        background-position: 0% center;
+      }
+      100% {
+        background-position: 200% center;
+      }
+    }
+    .search-header {
+      text-align: center;
+      font-size: 24px;
+      color: #3a54d9;
+      margin-top: 20px;
+      font-weight: bold;
+      border: 2px solid #04bfa4;
+      border-radius: 8px;
+      padding: 10px;
+      margin: 20px auto;
+      max-width: 300px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .search-section {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+      background-color: #9dffa2;
+      margin: 10px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .search-row {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+    input[type="text"], input[type="number"] {
+      padding: 12px;
+      border-radius: 8px;
+      border: 2px solid orange;
+      width: 200px;
+      font-family: inherit;
+      font-size: 16px;
+    }
+    button {
+      padding: 12px 25px;
+      background-color: #04bfa4;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 16px;
+      transition: all 0.3s;
+    }
+    button:hover {
+      background-color: #b03000;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .highlight-section {
+      width: 600px;
+      height: 300px;
+      margin: 20px auto;
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .highlight-section img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      cursor: pointer;
+    }
+    .product-title {
+      font-size: 26px;
+      color: maroon;
+      text-align: center;
+      margin: 30px 0 15px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid maroon;
+      display: inline-block;
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+    .title-container {
+      text-align: center;
+    }
+    .product-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+      justify-content: center;
+    }
+    .product-box {
+      background: white;
+      border-radius: 10px;
+      padding: 15px;
+      border: 2px solid #ddd;
+      width: 250px;
+      min-height: 350px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .product-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      border-color: orange;
+    }
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      transition: all 0.3s;
+    }
+    .social-icon:hover {
+      transform: scale(1.1);
+    }
+    .social-icon.facebook {
+      background-color: #3b5998;
+    }
+    .social-icon.instagram {
+      background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+    }
+    .social-icon.youtube {
+      background-color: #ff0000;
+    }
+    .product-image {
+      height: 150px;
+      background-color: #f5f5f5;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .product-image img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      cursor: pointer;
+    }
+    .product-details {
+      text-align: center;
+    }
+    .product-name {
+      font-weight: bold;
+      margin-bottom: 5px;
+      font-size: 18px;
+    }
+    .product-price {
+  color: #d03801;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 10px 0;
+  font-family: 'Segoe UI', 'Nirmala UI', sans-serif;
+}
+    }
+    .product-code {
+      color: #666;
+      margin-bottom: 10px;
+    }
+    .product-description {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 15px;
+      height: 60px;
+      overflow: hidden;
+    }
+    .order-btn {
+      background-color: #25a244;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: bold;
+      margin: 0 auto;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.3s;
+    }
+    .order-btn:hover {
+      background-color: #1e7e34;
+    }
+    footer {
+      background-color: #333;
+      color: white;
+      padding: 30px 20px;
+      margin-top: 40px;
+      text-align: center;
+    }
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .footer-section {
+      margin-bottom: 20px;
+      flex: 1;
+      min-width: 250px;
+    }
+    .footer-section h3 {
+  border-bottom: 2px solid #d03801;
+  padding-bottom: 5px;
+  display: inline-block;
+  text-align: left;
+  width: 100%;
+  margin-left: 0;
+    }
+    .whatsapp-float {
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      bottom: 40px;
+      right: 40px;
+      background-color: #25d366;
+      color: #FFF;
+      border-radius: 50px;
+      text-align: center;
+      font-size: 30px;
+      box-shadow: 2px 2px 3px #999;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    .whatsapp-float:hover {
+      background-color: #128C7E;
+      transform: scale(1.1);
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
+    }
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 500px;
+      border-radius: 10px;
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close:hover {
+      color: black;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-family: inherit;
+    }
+    .price-note {
+      color: #d03801;
+      margin-bottom: 15px;
+      font-style: italic;
+      font-size: 14px;
+    }
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+      }
+      .tagline {
+        font-size: 20px;
+      }
+      .search-row {
+        flex-direction: column;
+        width: 100%;
+      }
+      input[type="text"], input[type="number"] {
+        width: 100%;
+      }
+      .highlight-section {
+        width: 100%;
+        height: 200px;
+      }
+      .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 25px;
+      }
+      .modal-content {
+        width: 95%;
+        margin: 10% auto;
+      }
+	  .payment-options {
+      margin: 20px 0;
+    }
+    
+    .payment-option {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .payment-option:hover {
+      border-color: #04bfa4;
+      background-color: #f5f5f5;
+    }
+    
+    .payment-option input[type="radio"] {
+      margin-right: 10px;
+    }
+    
+    .payment-option label {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+    
+    .payment-icon {
+      margin-right: 10px;
+      font-size: 20px;
+    }
+    
+    .cash-icon {
+      color: #4CAF50;
+    }
+    
+    .upi-icon {
+      color: #5a67d8;
+    }
+    }
+  </style>
+  <style>
+  /* Add these styles to your existing CSS */
+  .phone-icon {
+    background-color: #25D366;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+  }
+  
+  .whatsapp-icon {
+    background-color: #25D366;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+  }
+  
+  .phone-icon:hover, .whatsapp-icon:hover {
+    transform: scale(1.1);
+  }
+  
+  .footer-section p {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .footer-section i:first-child {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <img src="images/logo.png" alt="NexShopy Logo">
+    <div class="tagline">
+     যেখানে বারো মাস চৈত্র মাস ।<br>
+      আর দাম, যা বুকে ব্যাথা নয়, মুখে আনে হাসি।
+    </div>
+    <div class="social-icons">
+      <a href="https://www.facebook.com/profile.php?id=61578152637279" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/reel/DL1RVzcIzfn/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://youtube.com/shorts/oBMi1WCXNz0?feature=share" class="social-icon youtube"><i class="fab fa-youtube"></i></a>
+    </div>
+  </header>
+
+  <div class="search-header">অনুসন্ধান / Search</div>
+  <section class="search-section">
+    <div class="search-row">
+      <label><b>দাম অনুযায়ী খুঁজুন / Price:</b></label>
+      <input type="number" id="minPrice" placeholder="ন্যূনতম দাম /Min price">
+      <span><b>থেকে /From</b></span>
+      <input type="number" id="maxPrice" placeholder="সর্বোচ্চ দাম/ Max price">
+      <span><b>পর্যন্ত |</b></span>
+    </div>
+    <div class="search-row">
+      <input type="text" id="productName" placeholder="পণ্যের নাম দিয়ে খুঁজুন / use name">
+      <input type="text" id="productCode" placeholder="পণ্যের কোড দিয়ে খুঁজুন / use code">
+      <button onclick="searchProducts()">খুঁজুন / Search</button>
+    </div>
+  </section>
+
+  <section class="highlight-section">
+    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+      <img src="images/highlight-banner.jpg" alt="Special Offer">
+    </a>
+  </section>
+
+  <div class="title-container">
+    <div class="product-title"><b>পণ্য তালিকা / Product list :-</b></div>
+  </div>
+
+  <section class="product-list" id="productList">
+    <!-- Products will be loaded here by JavaScript -->
+  </section>
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
   <h3 style="text-align: left; margin-left: 0;">যোগাযোগ/ Contact:</h3>
-  <p><i class="fas fa-map-marker-alt"></i> ১২৩/বি, বিজয়নগর, ঢাকা-১২১২</p>
+  <p><i class="fas fa-map-marker-alt"></i> Rajhat,Polba,Hooghly.-712123</p>
   <p>
-    <i class="fas fa-phone"></i> +৯১ ৯১৬৩২০১৭২৫ 
-    <a href="tel:+919163201725" class="social-icon phone-icon" style="margin-left: 10px;">
+    <i class="fas fa-phone"></i> 8100515783
+    <a href="tel:+918100515783" class="social-icon phone-icon" style="margin-left: 10px;">
       <i class="fas fa-phone-volume"></i>
     </a>
   </p>
   <p>
     <i class="fab fa-whatsapp"></i> WhatsApp 
-    <a href="https://wa.me/919163201725" class="social-icon whatsapp-icon" style="margin-left: 10px;" target="_blank">
+    <a href="https://wa.me/918100515783" class="social-icon whatsapp-icon" style="margin-left: 10px;" target="_blank">
       <i class="fab fa-whatsapp"></i>
     </a>
   </p>
   <p><i class="fas fa-envelope"></i> info@nexshopy.com</p>
 </div>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/profile.php?id=61578152637279" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/reel/DL1RVzcIzfn/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://youtube.com/shorts/oBMi1WCXNz0?feature=share" class="social-icon youtube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: 20px;">
+      &copy; ২০২৫ NexShopy - সর্বস্বত্ব সংরক্ষিত
+    </div>
+  </footer>
+  <a href="https://wa.me/8100515783" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  <!-- Order Form Modal -->
+   <div id="orderModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>অর্ডার ফর্ম</h2>
+      <form id="orderForm">
+        <div class="form-group">
+          <label for="modalProductName">পণ্যের নাম:</label>
+          <input type="text" id="modalProductName" readonly>
+        </div>
+        <div class="form-group">
+          <label for="modalProductCode">পণ্য কোড:</label>
+          <input type="text" id="modalProductCode" readonly>
+        </div>
+        <div class="form-group">
+          <label for="modalProductPrice">দাম:</label>
+          <input type="text" id="modalProductPrice" readonly>
+        </div>
+        <div class="price-note">
+          **Price excludes packaging & delivery/দামের মধ্যে প্যাকেজিং এবং ডেলিভারি অন্তর্ভুক্ত নেই |
+        </div>
+        <div class="form-group">
+          <label for="quantity">পরিমাণ:</label>
+          <input type="number" id="quantity" min="1" value="1" required>
+        </div>
+        <h3>আপনার বিবরণ</h3>
+        <div class="form-group">
+          <label for="customerName">নাম:</label>
+          <input type="text" id="customerName" required>
+        </div>
+        <div class="form-group">
+          <label for="customerAddress">ঠিকানা:</label>
+          <input type="text" id="customerAddress" required>
+        </div>
+        <div class="form-group">
+          <label for="customerMobile">মোবাইল নম্বর:</label>
+          <input type="text" id="customerMobile" required>
+        </div>
+        <div class="form-group">
+          <label for="distributorCode">ডিস্ট্রিবিউটর কোড/রেফারেল কোড (যদি থাকে):</label>
+          <input type="text" id="distributorCode">
+        </div>
+        
+        <h3>পেমেন্ট মেথড</h3>
+        <div class="payment-options">
+          <div class="payment-option">
+            <input type="radio" id="cashPayment" name="paymentMethod" value="Cash & Carry (ক্যাশ অন ডেলিভারি)" checked>
+            <label for="cashPayment">
+              <i class="fas fa-money-bill-wave payment-icon cash-icon"></i>
+              Cash & Carry (ক্যাশ অন ডেলিভারি)
+            </label>
+          </div>
+          <div class="payment-option">
+            <input type="radio" id="upiPayment" name="paymentMethod" value="UPI পেমেন্ট">
+            <label for="upiPayment">
+              <i class="fas fa-mobile-alt payment-icon upi-icon"></i>
+              UPI পেমেন্ট
+            </label>
+          </div>
+        </div>
+        
+        <button type="submit" style="margin-top: 20px; width: 100%;">অর্ডার নিশ্চিত করুন</button>
+      </form>
+    </div>
+  </div>
+  <script>
+    // Product data array with JPG images
+    const products = [
+      { 
+        id: 1, 
+        name: "মসলিন শাড়ি/Muslin Saree", 
+        code: "MUS10", 
+        price: 1150, 
+        image: "images/muslin01.jpg",
+        youtube: "https://youtu.be/0ncA9LJYGCo",
+        description: "মসলিন শাড়ি শীতল , আরামদায়ক ও রাজকীয়"
+      },
+      { 
+        id: 2, 
+        name: "মসলিন শাড়ি/Muslin Saree", 
+        code: "MUS11", 
+        price: 1150, 
+        image: "images/product2.jpg",
+        youtube: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        description: "মসলিন শাড়ি শীতল , আরামদায়ক ও রাজকীয়"
+      },
+      { 
+        id: 3, 
+        name: "জিয়াওমি রেডমি নোট ১০", 
+        code: "XM-NOTE10", 
+        price: 21799, 
+        image: "images/product3.jpg",
+        youtube: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        description: "জিয়াওমি রেডমি নোট ১০ স্মার্টফোন, ৬.৪৩ ইঞ্চি AMOLED ডিসপ্লে, ৬জিবি র্যাম, ১২৮জিবি স্টোরেজ, ৪৮MP ক্যামেরা"
+      },
+      { 
+        id: 4, 
+        name: "ওয়ানপ্লাস নর্ড সিই", 
+        code: "OP-NORDCE", 
+        price: 32999, 
+        image: "images/product4.jpg",
+        youtube: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        description: "ওয়ানপ্লাস নর্ড সিই ৫জি স্মার্টফোন, ৬.৪৩ ইঞ্চি ৯০Hz ডিসপ্লে, ৮জিবি র্যাম, ১২৮জিবি স্টোরেজ, ৬৪MP ক্যামেরা"
+      },
+      { 
+        id: 5, 
+        name: "রিয়েলমি ৮ প্রো", 
+        code: "RM-8PRO", 
+        price: 23500, 
+        image: "images/product5.jpg",
+        youtube: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        description: "রিয়েলমি ৮ প্রো স্মার্টফোন, ৬.৪ ইঞ্চি সুপার AMOLED ডিসপ্লে, ৮জিবি র্যাম, ১২৮জিবি স্টোরেজ, ১০৮MP ক্যামেরা"
+      },
+      { 
+        id: 6, 
+        name: "অপ্পো এ৫৭", 
+        code: "OPPO-A57", 
+        price: 19999, 
+        image: "images/product6.jpg",
+        youtube: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        description: "অপ্পো এ৫৭ স্মার্টফোন, ৬.৫৬ ইঞ্চি ডিসপ্লে, ৪জিবি র্যাম, ৬৪জিবি স্টোরেজ, ১৩MP ডুয়াল ক্যামেরা"
+      }
+    ];
+
+    // Modal functionality
+    const modal = document.getElementById("orderModal");
+    const span = document.getElementsByClassName("close")[0];
+
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    // Function to generate WhatsApp order message
+    function generateOrderMessage(product, quantity, customerDetails, paymentMethod) {
+      return `*নতুন অর্ডার*%0A%0A` +
+             `*পণ্যের নাম:* ${product.name}%0A` +
+             `*পণ্য কোড:* ${product.code}%0A` +
+             `*দাম:* ৳${product.price.toLocaleString('bn-BD')}%0A` +
+             `*পরিমাণ:* ${quantity}%0A` +
+             `*পেমেন্ট মেথড:* ${paymentMethod}%0A%0A` +
+             `*ক্রেতার বিবরণ*%0A` +
+             `*নাম:* ${customerDetails.name}%0A` +
+             `*ঠিকানা:* ${customerDetails.address}%0A` +
+             `*মোবাইল:* ${customerDetails.mobile}%0A` +
+             `*রেফারেল কোড:* ${customerDetails.distributorCode || 'N/A'}%0A%0A` +
+             `*মোট মূল্য:* ৳${(product.price * quantity).toLocaleString('bn-BD')}`;
+      }
+
+    // Display all products initially
+    function displayProducts(productsToDisplay) {
+      const productList = document.getElementById('productList');
+      productList.innerHTML = '';
+
+      if (productsToDisplay.length === 0) {
+        productList.innerHTML = `
+          <div style="text-align:center; width:100%; padding:40px; font-size:20px; color:#d03801;">
+            কোন পণ্য পাওয়া যায়নি
+          </div>
+        `;
+        return;
+      }
+
+      productsToDisplay.forEach(product => {
+        const productBox = document.createElement('div');
+        productBox.className = 'product-box';
+        productBox.innerHTML = `
+          <div class="product-image">
+            <a href="${product.youtube}" target="_blank">
+              <img src="${product.image}" alt="${product.name}" loading="lazy">
+            </a>
+          </div>
+          <div class="product-details">
+            <div class="product-name">${product.name}</div>
+           <div class="product-price">₹${product.price.toLocaleString('en-IN')}</div>
+            <div class="product-code">কোড: ${product.code}</div>
+            <div class="product-description">${product.description}</div>
+            <button class="order-btn" onclick="openOrderModal(${product.id})">
+              <i class="fas fa-shopping-cart"></i> অর্ডার করুন / Order now
+            </button>
+          </div>
+        `;
+        productList.appendChild(productBox);
+      });
+    }
+
+    // Open order modal with product details
+    function openOrderModal(productId) {
+      const product = products.find(p => p.id === productId);
+      if (product) {
+        document.getElementById('modalProductName').value = product.name;
+        document.getElementById('modalProductCode').value = product.code;
+        document.getElementById('modalProductPrice').value = `৳${product.price.toLocaleString('bn-BD')}`;
+        modal.style.display = "block";
+      }
+    }
+    // Form submission
+      document.getElementById('orderForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const productName = document.getElementById('modalProductName').value;
+      const productCode = document.getElementById('modalProductCode').value;
+      const quantity = document.getElementById('quantity').value;
+      const customerName = document.getElementById('customerName').value;
+      const customerAddress = document.getElementById('customerAddress').value;
+      const customerMobile = document.getElementById('customerMobile').value;
+      const distributorCode = document.getElementById('distributorCode').value;
+      const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+      const product = products.find(p => p.name === productName && p.code === productCode);
+      if (!product) return;
+      const customerDetails = {
+        name: customerName,
+        address: customerAddress,
+        mobile: customerMobile,
+        distributorCode: distributorCode
+      };
+      const whatsappUrl = `https://wa.me/918100515783?text=${generateOrderMessage(product, quantity, customerDetails, paymentMethod)}`;
+      window.open(whatsappUrl, '_blank');
+      modal.style.display = "none";
+    });
+    // Search function
+    function searchProducts() {
+      const minPrice = parseFloat(document.getElementById('minPrice').value) || 0;
+      const maxPrice = parseFloat(document.getElementById('maxPrice').value) || Infinity;
+      const nameQuery = document.getElementById('productName').value.toLowerCase();
+      const codeQuery = document.getElementById('productCode').value.toLowerCase();
+
+      const filteredProducts = products.filter(product => {
+        const priceMatch = product.price >= minPrice && product.price <= maxPrice;
+        const nameMatch = product.name.toLowerCase().includes(nameQuery);
+        const codeMatch = product.code.toLowerCase().includes(codeQuery);
+        
+        return priceMatch && (nameQuery === '' || nameMatch) && (codeQuery === '' || codeMatch);
+      });
+
+      displayProducts(filteredProducts);
+    }
+
+    // Initialize with all products
+    window.onload = function() {
+      displayProducts(products);
+    };
+
+    // WhatsApp button scroll effect
+    window.addEventListener('scroll', function() {
+      const whatsappBtn = document.querySelector('.whatsapp-float');
+      if (window.scrollY > 100) {
+        whatsappBtn.style.bottom = '20px';
+      } else {
+        whatsappBtn.style.bottom = '40px';
+      }
+    });
+  </script>
+</body>
+</html>
