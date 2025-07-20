@@ -503,7 +503,7 @@
   </section>
 
   <div class="title-container">
-    <div class="product-title"><b>পণ্য তালিকা / Product list :-</b></div>
+    <div class="product-title"><b>পণ্য তালিকা / Product list:</b></div>
   </div>
 
   <section class="product-list" id="productList">
@@ -521,7 +521,7 @@
     </a>
   </p>
   <p>
-    <i class="fab fa-whatsapp"></i> WhatsApp 
+    <i class="fab fa-whatsapp"></i> 8100515783 
     <a href="https://wa.me/918100515783" class="social-icon whatsapp-icon" style="margin-left: 10px;" target="_blank">
       <i class="fab fa-whatsapp"></i>
     </a>
@@ -546,38 +546,38 @@
    <div id="orderModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
-      <h2>অর্ডার ফর্ম</h2>
+      <h2>অর্ডার ফর্ম/Order form:</h2>
       <form id="orderForm">
         <div class="form-group">
-          <label for="modalProductName">পণ্যের নাম:</label>
+          <label for="modalProductName">পণ্যের নাম/Product Name:</label>
           <input type="text" id="modalProductName" readonly>
         </div>
         <div class="form-group">
-          <label for="modalProductCode">পণ্য কোড:</label>
+          <label for="modalProductCode">পণ্য কোড/ Code:</label>
           <input type="text" id="modalProductCode" readonly>
         </div>
         <div class="form-group">
-          <label for="modalProductPrice">দাম:</label>
-          <input type="text" id="modalProductPrice" readonly>
-        </div>
+  <label for="modalProductPrice">দাম/Price:</label>
+  <input type="text" id="modalProductPrice" value="₹${product.price.toLocaleString('en-IN')}" readonly>
+</div>
         <div class="price-note">
-          **Price excludes packaging & delivery/দামের মধ্যে প্যাকেজিং এবং ডেলিভারি অন্তর্ভুক্ত নেই |
+          **Price excludes packaging & delivery/পণ্যের দামের মধ্যে প্যাকেজিং এবং ডেলিভারি অন্তর্ভুক্ত নেই |
         </div>
         <div class="form-group">
-          <label for="quantity">পরিমাণ:</label>
+          <label for="quantity">পরিমাণ/Quantity:</label>
           <input type="number" id="quantity" min="1" value="1" required>
         </div>
-        <h3>আপনার বিবরণ</h3>
+        <h3>আপনার বিবরণ/ Your Details:</h3>
         <div class="form-group">
-          <label for="customerName">নাম:</label>
+          <label for="customerName">নাম/Name:</label>
           <input type="text" id="customerName" required>
         </div>
         <div class="form-group">
-          <label for="customerAddress">ঠিকানা:</label>
+          <label for="customerAddress">ঠিকানা/ Address:</label>
           <input type="text" id="customerAddress" required>
         </div>
         <div class="form-group">
-          <label for="customerMobile">মোবাইল নম্বর:</label>
+          <label for="customerMobile">মোবাইল নম্বর/ Mobile No.:</label>
           <input type="text" id="customerMobile" required>
         </div>
         <div class="form-group">
@@ -585,7 +585,7 @@
           <input type="text" id="distributorCode">
         </div>
         
-        <h3>পেমেন্ট মেথড</h3>
+        <h3>পেমেন্ট মেথড/ Payment Method</h3>
         <div class="payment-options">
           <div class="payment-option">
             <input type="radio" id="cashPayment" name="paymentMethod" value="Cash & Carry (ক্যাশ অন ডেলিভারি)" checked>
@@ -682,19 +682,18 @@
 
     // Function to generate WhatsApp order message
     function generateOrderMessage(product, quantity, customerDetails, paymentMethod) {
-      return `*নতুন অর্ডার*%0A%0A` +
-             `*পণ্যের নাম:* ${product.name}%0A` +
-             `*পণ্য কোড:* ${product.code}%0A` +
-             `*দাম:* ৳${product.price.toLocaleString('bn-BD')}%0A` +
-             `*পরিমাণ:* ${quantity}%0A` +
-             `*পেমেন্ট মেথড:* ${paymentMethod}%0A%0A` +
-             `*ক্রেতার বিবরণ*%0A` +
-             `*নাম:* ${customerDetails.name}%0A` +
-             `*ঠিকানা:* ${customerDetails.address}%0A` +
-             `*মোবাইল:* ${customerDetails.mobile}%0A` +
-             `*রেফারেল কোড:* ${customerDetails.distributorCode || 'N/A'}%0A%0A` +
-             `*মোট মূল্য:* ৳${(product.price * quantity).toLocaleString('bn-BD')}`;
-      }
+  return `*New Order*%0A%0A` +
+         `*Product Name:* ${product.name}%0A` +
+         `*Product Code:* ${product.code}%0A` +
+         `*Price (per unit):* ₹${product.price.toLocaleString('en-IN')}%0A` +
+         `*Quantity:* ${quantity}%0A` +
+         `*Payment Method:* ${paymentMethod}%0A%0A` +
+         `*Customer Details*%0A` +
+         `*Name:* ${customerDetails.name}%0A` +
+         `*Address:* ${customerDetails.address}%0A` +
+         `*Mobile:* ${customerDetails.mobile}%0A` +
+         `*Referral Code:* ${customerDetails.distributorCode || 'N/A'}`;
+}
 
     // Display all products initially
     function displayProducts(productsToDisplay) {
@@ -735,12 +734,12 @@
 
     // Open order modal with product details
     function openOrderModal(productId) {
-      const product = products.find(p => p.id === productId);
-      if (product) {
-        document.getElementById('modalProductName').value = product.name;
-        document.getElementById('modalProductCode').value = product.code;
-        document.getElementById('modalProductPrice').value = `৳${product.price.toLocaleString('bn-BD')}`;
-        modal.style.display = "block";
+  const product = products.find(p => p.id === productId);
+  if (product) {
+    document.getElementById('modalProductName').value = product.name;
+    document.getElementById('modalProductCode').value = product.code;
+    document.getElementById('modalProductPrice').value = `₹${product.price.toLocaleString('en-IN')}`;
+    modal.style.display = "block";
       }
     }
     // Form submission
